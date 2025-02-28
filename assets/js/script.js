@@ -23,3 +23,36 @@ const questions = [
     { question: "Who wrote 'Hamlet'?", answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], correct: "Shakespeare", image: "correct.png" },
     { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Venus"], correct: "Mars", image: "correct.png" },
 ];
+
+// Set total number of questions
+totalQuestionsDisplay.textContent = questions.length;
+
+startBtn.addEventListener("click", startQuiz);
+nextBtn.addEventListener("click", () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+});
+restartBtn.addEventListener("click", () => {
+    resultScreen.classList.add("hidden");
+    startScreen.classList.remove("hidden");
+});
+
+function startQuiz() {
+    username = usernameInput.value.trim();
+    
+    const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
+
+    if (!usernameRegex.test(username)) {
+        alert("Please enter a valid username (Start with a capital letter, at least 2 words).");
+        return;
+    }
+
+    localStorage.setItem("username", username);
+    usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
+    startScreen.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
+    
+    score = 0;
+    currentQuestionIndex = 0;
+    setNextQuestion();
+}
