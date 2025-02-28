@@ -17,3 +17,9 @@ const questionNumberDisplay = document.getElementById("question-number");
 const totalQuestionsDisplay = document.getElementById("total-questions");
 
 let currentQuestionIndex, score, timer, username;
+
+const questions = [
+    { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Rome"], correct: "Paris", image: "correct.png" },
+    { question: "Who wrote 'Hamlet'?", answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], correct: "Shakespeare", image: "correct.png" },
+    { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Venus"], correct: "Mars", image: "correct.png" },
+];
