@@ -86,3 +86,46 @@ function showQuestion(questionObj) {
         answerButtons.appendChild(button);
     });
 }
+
+function selectAnswer(selected, correct, image) {
+    clearInterval(timer);
+
+    // Disable all buttons after selection
+    Array.from(answerButtons.children).forEach(button => {
+        button.disabled = true;
+        if (button.textContent === correct) {
+            button.classList.add("correct-answer"); // Green for correct answer
+        } else {
+            button.classList.add("wrong-answer"); // Red for incorrect answers
+        }
+    });
+
+    if (selected === correct) {
+        score++;
+        feedbackText.textContent = "Correct!";
+        feedbackText.style.color = "green";
+        feedbackImage.src = image;
+    } else {
+        feedbackText.textContent = `Wrong! The correct answer was ${correct}`;
+        feedbackText.style.color = "red";
+        feedbackImage.src = "incorrect.png";
+    }
+
+    feedbackImage.classList.remove("hidden");
+
+    // If this was the last question, end the quiz
+    if (currentQuestionIndex === questions.length - 1) {
+        setTimeout(endQuiz, 2000); // Show feedback for 2 seconds, then end quiz
+    } else {
+        nextBtn.classList.remove("hidden");
+    }
+}
+
+function resetState() {
+    feedbackText.textContent = "";
+    feedbackImage.classList.add("hidden");
+    nextBtn.classList.add("hidden");
+    while (answerButtons.firstChild) {
+        answerButtons.removeChild(answerButtons.firstChild);
+    }
+}
