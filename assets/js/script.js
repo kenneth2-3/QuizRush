@@ -129,3 +129,25 @@ function resetState() {
         answerButtons.removeChild(answerButtons.firstChild);
     }
 }
+
+function startTimer() {
+    let timeLeft = 10;
+    timerDisplay.textContent = timeLeft;
+    timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            feedbackText.textContent = "Time's up!";
+            feedbackText.style.color = "orange";
+            nextBtn.classList.remove("hidden");
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+    quizScreen.classList.add("hidden");
+    resultScreen.classList.remove("hidden");
+    finalScore.textContent = `Your score: ${score} / ${questions.length}`;
+    finalFeedback.textContent = score > 1 ? "Great job!" : "Better luck next time!";
+}
