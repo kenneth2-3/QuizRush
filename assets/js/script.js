@@ -56,3 +56,22 @@ function startQuiz() {
     currentQuestionIndex = 0;
     setNextQuestion();
 }
+
+function setNextQuestion() {
+    resetState();
+
+    if (currentQuestionIndex < questions.length) {
+        questionNumberDisplay.textContent = currentQuestionIndex + 1; // Update question number
+        showQuestion(questions[currentQuestionIndex]);
+        startTimer();
+
+        // Hide "Next" button if it's the last question
+        if (currentQuestionIndex === questions.length - 1) {
+            nextBtn.classList.add("hidden");
+        } else {
+            nextBtn.classList.remove("hidden");
+        }
+    } else {
+        endQuiz();
+    }
+}
