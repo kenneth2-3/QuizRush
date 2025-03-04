@@ -1,153 +1,149 @@
-const startScreen = document.getElementById("start-screen");
-const quizScreen = document.getElementById("quiz-screen");
-const resultScreen = document.getElementById("result-screen");
-const startBtn = document.getElementById("start-btn");
-const nextBtn = document.getElementById("next-btn");
-const restartBtn = document.getElementById("restart-btn");
-const questionText = document.getElementById("question-text");
-const answerButtons = document.getElementById("answer-buttons");
-const timerDisplay = document.getElementById("time-left");
-const feedbackText = document.getElementById("feedback");
-const finalScore = document.getElementById("final-score");
-const finalFeedback = document.getElementById("final-feedback");
-const usernameInput = document.getElementById("username");
-const usernameDisplay = document.getElementById("username-display");
-const feedbackImage = document.getElementById("feedback-image");
-const questionNumberDisplay = document.getElementById("question-number");
-const totalQuestionsDisplay = document.getElementById("total-questions");
+document.addEventListener("DOMContentLoaded", () => {
+    const startScreen = document.getElementById("start-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const resultScreen = document.getElementById("result-screen");
+    const startBtn = document.getElementById("start-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const restartBtn = document.getElementById("restart-btn");
+    const questionText = document.getElementById("question-text");
+    const answerButtons = document.getElementById("answer-buttons");
+    const timerDisplay = document.getElementById("time-left");
+    const feedbackText = document.getElementById("feedback");
+    const finalScore = document.getElementById("final-score");
+    const finalFeedback = document.getElementById("final-feedback");
+    const usernameInput = document.getElementById("username");
+    const usernameDisplay = document.getElementById("username-display");
+    const feedbackImage = document.getElementById("feedback-image");
+    const questionNumberDisplay = document.getElementById("question-number");
+    const totalQuestionsDisplay = document.getElementById("total-questions");
+    const questionCounter = document.getElementById("question-counter");
 
-let currentQuestionIndex, score, timer, username;
+    let currentQuestionIndex = 0, score = 0, timer, username;
 
-const questions = [
-    { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Rome"], correct: "Paris", image: "correct.png" },
-    { question: "Who wrote 'Hamlet'?", answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], correct: "Shakespeare", image: "correct.png" },
-    { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Venus"], correct: "Mars", image: "correct.png" },
-];
+    const questions = [
+        { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Rome"], correct: "Paris", image: "correct.png" },
+        { question: "Who wrote 'Hamlet'?", answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], correct: "Shakespeare", image: "correct.png" },
+        { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Venus"], correct: "Mars", image: "correct.png" },
+    ];
 
-// Set total number of questions
-totalQuestionsDisplay.textContent = questions.length;
+    totalQuestionsDisplay.textContent = questions.length;
 
-startBtn.addEventListener("click", startQuiz);
-nextBtn.addEventListener("click", () => {
-    currentQuestionIndex++;
-    setNextQuestion();
-});
-restartBtn.addEventListener("click", () => {
-    resultScreen.classList.add("hidden");
-    startScreen.classList.remove("hidden");
-});
+    startBtn.addEventListener("click", startQuiz);
+    nextBtn.addEventListener("click", () => {
+        currentQuestionIndex++;
+        setNextQuestion();
+    });
+    restartBtn.addEventListener("click", restartQuiz);
 
-function startQuiz() {
-    username = usernameInput.value.trim();
-    
-    const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
+    function startQuiz() {
+        username = usernameInput.value.trim();
+        const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
 
-    if (!usernameRegex.test(username)) {
-        alert("Please enter a valid username (Start with a capital letter, at least 2 words).");
-        return;
+        if (!usernameRegex.test(username)) {
+            alert("Please enter a valid username (Start with a capital letter, at least 2 words).");
+            return;
+        }
+
+        localStorage.setItem("username", username);
+        usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
+
+        startScreen.classList.add("hidden");
+        quizScreen.classList.remove("hidden");
+        questionCounter.style.display = "block";
+
+        score = 0;
+        currentQuestionIndex = 0;
+        setNextQuestion();
     }
 
-    localStorage.setItem("username", username);
-    usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
-    startScreen.classList.add("hidden");
-    quizScreen.classList.remove("hidden");
-    
-    score = 0;
-    currentQuestionIndex = 0;
-    setNextQuestion();
-}
+    function setNextQuestion() {
+        resetState();
 
-function setNextQuestion() {
-    resetState();
+        if (currentQuestionIndex < questions.length) {
+            questionNumberDisplay.textContent = currentQuestionIndex + 1;
+            showQuestion(questions[currentQuestionIndex]);
+            startTimer();
+        } else {
+            endQuiz();
+        }
+    }
 
-    if (currentQuestionIndex < questions.length) {
-        questionNumberDisplay.textContent = currentQuestionIndex + 1; // Update question number
-        showQuestion(questions[currentQuestionIndex]);
-        startTimer();
+    function showQuestion(questionObj) {
+        questionText.textContent = questionObj.question; // FIXED: Make sure question is displayed
+        answerButtons.innerHTML = ""; // Clear previous buttons properly
 
-        // Hide "Next" button if it's the last question
+        questionObj.answers.forEach(answer => {
+            const button = document.createElement("button");
+            button.textContent = answer;
+            button.classList.add("btn");
+            button.addEventListener("click", () => selectAnswer(button, answer, questionObj.correct, questionObj.image));
+            answerButtons.appendChild(button);
+        });
+
+        nextBtn.classList.add("hidden"); // Hide Next until an answer is selected
+    }
+
+    function selectAnswer(buttonElement, selected, correct, image) {
+        clearInterval(timer);
+
+        Array.from(answerButtons.children).forEach(button => {
+            button.disabled = true;
+            if (button.textContent === correct) {
+                button.classList.add("correct-answer");
+            } else {
+                button.classList.add("wrong-answer");
+            }
+        });
+
+        if (selected === correct) {
+            score++;
+            feedbackText.textContent = "Correct!";
+            feedbackText.style.color = "green";
+        } else {
+            feedbackText.textContent = `Wrong! The correct answer was ${correct}`;
+            feedbackText.style.color = "red";
+        }
+
         if (currentQuestionIndex === questions.length - 1) {
-            nextBtn.classList.add("hidden");
+            setTimeout(endQuiz, 2000);
         } else {
-            nextBtn.classList.remove("hidden");
+            nextBtn.classList.remove("hidden"); // Show next button after selection
         }
-    } else {
-        endQuiz();
-    }
-}
-
-function showQuestion(questionObj) {
-    questionText.textContent = questionObj.question;
-    questionObj.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.classList.add("btn");
-        button.addEventListener("click", () => selectAnswer(answer, questionObj.correct, questionObj.image));
-        answerButtons.appendChild(button);
-    });
-}
-
-function selectAnswer(selected, correct, image) {
-    clearInterval(timer);
-
-    // Disable all buttons after selection
-    Array.from(answerButtons.children).forEach(button => {
-        button.disabled = true;
-        if (button.textContent === correct) {
-            button.classList.add("correct-answer"); // Green for correct answer
-        } else {
-            button.classList.add("wrong-answer"); // Red for incorrect answers
-        }
-    });
-
-    if (selected === correct) {
-        score++;
-        feedbackText.textContent = "Correct!";
-        feedbackText.style.color = "green";
-        feedbackImage.src = image;
-    } else {
-        feedbackText.textContent = `Wrong! The correct answer was ${correct}`;
-        feedbackText.style.color = "red";
-        feedbackImage.src = "incorrect.png";
     }
 
-    feedbackImage.classList.remove("hidden");
-
-    // If this was the last question, end the quiz
-    if (currentQuestionIndex === questions.length - 1) {
-        setTimeout(endQuiz, 2000); // Show feedback for 2 seconds, then end quiz
-    } else {
-        nextBtn.classList.remove("hidden");
+    function resetState() {
+        feedbackText.textContent = "";
+        nextBtn.classList.add("hidden");
+        answerButtons.innerHTML = "";
     }
-}
 
-function resetState() {
-    feedbackText.textContent = "";
-    feedbackImage.classList.add("hidden");
-    nextBtn.classList.add("hidden");
-    while (answerButtons.firstChild) {
-        answerButtons.removeChild(answerButtons.firstChild);
-    }
-}
-
-function startTimer() {
-    let timeLeft = 10;
-    timerDisplay.textContent = timeLeft;
-    timer = setInterval(() => {
-        timeLeft--;
+    function startTimer() {
+        let timeLeft = 10;
         timerDisplay.textContent = timeLeft;
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            feedbackText.textContent = "Time's up!";
-            feedbackText.style.color = "orange";
-            nextBtn.classList.remove("hidden");
-        }
-    }, 1000);
-}
+        timer = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                feedbackText.textContent = "Time's up!";
+                nextBtn.classList.remove("hidden");
+            }
+        }, 1000);
+    }
 
-function endQuiz() {
-    quizScreen.classList.add("hidden");
-    resultScreen.classList.remove("hidden");
-    finalScore.textContent = `Your score: ${score} / ${questions.length}`;
-    finalFeedback.textContent = score > 1 ? "Great job!" : "Better luck next time!";
-}
+    function endQuiz() {
+        quizScreen.classList.add("hidden");
+        resultScreen.classList.remove("hidden");
+        questionCounter.style.display = "none"; 
+
+        finalScore.textContent = `Your score: ${score} / ${questions.length}`;
+        finalFeedback.textContent = score > 1 ? "Great job!" : "Better luck next time!";
+    }
+
+    function restartQuiz() {
+        resultScreen.classList.add("hidden");
+        startScreen.classList.remove("hidden");
+        questionCounter.style.display = "none"; 
+        usernameInput.value = "";
+    }
+});
