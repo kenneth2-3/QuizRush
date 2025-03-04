@@ -75,3 +75,14 @@ function setNextQuestion() {
         endQuiz();
     }
 }
+
+function showQuestion(questionObj) {
+    questionText.textContent = questionObj.question;
+    questionObj.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.classList.add("btn");
+        button.addEventListener("click", () => selectAnswer(answer, questionObj.correct, questionObj.image));
+        answerButtons.appendChild(button);
+    });
+}
