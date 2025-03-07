@@ -200,6 +200,11 @@ input[type="text"] {
     color: white;
 }
 
+.disabled {
+    pointer-events: none; /* Prevents hover and clicking */
+    opacity: 0.6; /* Greyed-out effect */
+}
+
 .btn:disabled {
     cursor: not-allowed;
     opacity: 0.6;
