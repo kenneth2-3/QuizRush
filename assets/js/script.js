@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     restartBtn.addEventListener("click", restartQuiz);
 
+    // Starts the quiz
     function startQuiz() {
         username = usernameInput.value.trim();
         const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
@@ -58,9 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Store username and display it
         localStorage.setItem("username", username);
         usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
 
+        // Hide start screen and display it
         startScreen.classList.add("hidden");
         quizScreen.classList.remove("hidden");
         questionCounter.style.display = "block";
@@ -70,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setNextQuestion();
     }
 
+    // Sets the next question in the quiz
     function setNextQuestion() {
         resetState();
 
@@ -82,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Displays the current question and answers
     function showQuestion(questionObj) {
         questionText.textContent = questionObj.question; 
         answerButtons.innerHTML = ""; // Clear previous buttons properly
@@ -97,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtn.classList.add("hidden"); // Hide Next until an answer is selected
     }
 
+    // Handles answer selection and provides feedback
     function selectAnswer(buttonElement, selected, correct, image) {
         clearInterval(timer);
 
@@ -125,18 +131,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Resets UI for the next question
     function resetState() {
         feedbackText.textContent = "";
         nextBtn.classList.add("hidden");
         answerButtons.innerHTML = "";
     }
 
+    // Starts the countdown timer and updates the display
     function startTimer() {
         let timeLeft = 10;
-        timerDisplay.textContent = timeLeft;
+        timerDisplay.textContent = `${timeLeft} seconds`;
         timer = setInterval(() => {
             timeLeft--;
-            timerDisplay.textContent = timeLeft;
+            timerDisplay.textContent = `${timeLeft} seconds`;
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 feedbackText.textContent = "Time's up!";
@@ -145,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
+    // Ends the quiz and shows the results screen
     function endQuiz() {
         quizScreen.classList.add("hidden");
         resultScreen.classList.remove("hidden");
@@ -154,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         finalFeedback.textContent = score > 1 ? "Great job!" : "Better luck next time!";
     }
 
+    // Restarts the quiz
     function restartQuiz() {
         resultScreen.classList.add("hidden");
         startScreen.classList.remove("hidden");
