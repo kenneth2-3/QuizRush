@@ -16,11 +16,21 @@
     
     <nav>
         <header>
-            <h1>QuizRush</h1> <!-- Only the quiz name in the header -->
+            <h1>QuizRush</h1> 
         </header>
-        
+
         <main>
-            <section id="start-screen">
+            <section id="quiz-rules-section">
+                <h2>Quiz Rules:</h2>
+                <ul id="quiz-rules">
+                    <li>- Answer all questions within the time limit.</li>
+                    <li>- Each correct answer earns you points.</li>
+                    <li>- No going back to previous questions.</li>
+                    <li>- Try to get the highest score!</li>
+                </ul>
+            </section>
+
+            <section id="input-section">
                 <label for="username">Enter your name:</label>
                 <input type="text" id="username" placeholder="Your name">
                 <button id="start-btn">Start Quiz</button>
@@ -42,10 +52,10 @@
                 <button id="restart-btn">Restart Quiz</button>
             </section>
 
-            <div id="question-counter">Question <span id="question-number">1</span> / <span id="total-questions">0</span></div>
+            <div id="question-counter" class="hidden">Question <span id="question-number">1</span> / <span id="total-questions">0</span></div>
         </main>
     </nav>
-
+    
     <!-- link for js -->
     <script src="assets/js/script.js"></script>
 </body>
