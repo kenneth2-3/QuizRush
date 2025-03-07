@@ -59,6 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        if (username.length < 3) {  
+            alert("Username must be at least 3 characters long.");
+            return;
+        }
+
         // Store username and display it
         localStorage.setItem("username", username);
         usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
@@ -103,18 +108,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Handles answer selection and provides feedback
-    function selectAnswer(buttonElement, selected, correct, image) {
-        clearInterval(timer);
-
+    function selectAnswer(buttonElement, selected, correct) {
+        clearInterval(timer); // Stop timer when an answer is selected
+    
         Array.from(answerButtons.children).forEach(button => {
-            button.disabled = true;
+            button.disabled = true; 
+            button.classList.add("disabled"); // Prevent hover effect
+    
             if (button.textContent === correct) {
                 button.classList.add("correct-answer");
             } else {
                 button.classList.add("wrong-answer");
             }
         });
-
+    
         if (selected === correct) {
             score++;
             feedbackText.textContent = "Correct!";
@@ -123,13 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
             feedbackText.textContent = `Wrong! The correct answer was ${correct}`;
             feedbackText.style.color = "red";
         }
-
-        if (currentQuestionIndex === questions.length - 1) {
-            setTimeout(endQuiz, 2000);
+    
+        // Only show next button if it's NOT the last question
+        if (currentQuestionIndex < questions.length - 1) {
+            nextBtn.classList.remove("hidden");
         } else {
-            nextBtn.classList.remove("hidden"); // Show next button after selection
+            setTimeout(endQuiz, 2000); // If last question, end quiz
         }
-    }
+    }    
 
     // Resets UI for the next question
     function resetState() {
@@ -141,16 +149,45 @@ document.addEventListener("DOMContentLoaded", () => {
     // Starts the countdown timer and updates the display
     function startTimer() {
         let timeLeft = 10;
-        timerDisplay.textContent = `${timeLeft} seconds`;
+        timerDisplay.textContent = `${timeLeft} seconds left!`;
+
         timer = setInterval(() => {
             timeLeft--;
-            timerDisplay.textContent = `${timeLeft} seconds`;
+            timerDisplay.textContent = `${timeLeft} seconds left!`;
+
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                feedbackText.textContent = "Time's up!";
-                nextBtn.classList.remove("hidden");
+                handleTimeUp();
             }
         }, 1000);
+    }
+
+    // Handles the question when time is up
+    function handleTimeUp() {
+        feedbackText.textContent = "Time's up!";
+        feedbackText.style.color = "red";
+        
+        // Get the correct answer
+        const correctAnswer = questions[currentQuestionIndex].correct;
+    
+        // Disable all buttons and color them appropriately
+        Array.from(answerButtons.children).forEach(button => {
+            button.disabled = true;
+            button.classList.add("disabled"); // Prevent hover effect
+    
+            if (button.textContent === correctAnswer) {
+                button.classList.add("correct-answer"); // Green
+            } else {
+                button.classList.add("wrong-answer"); // Red
+            }
+        });
+    
+        // Show "Next Question" button only if NOT the last question
+        if (currentQuestionIndex < questions.length - 1) {
+            nextBtn.classList.remove("hidden");
+        } else {
+            setTimeout(endQuiz, 2000); // End quiz on last question
+        }
     }
 
     // Ends the quiz and shows the results screen
