@@ -35,19 +35,66 @@ button:hover {
 }
 
 /* Start Screen */
-#start-screen {
-    margin-top: 50px;
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #004085;
+    margin-right: 30px;
 }
 
 /* Quiz Screen */
-#quiz-screen {
-    background: white;
-    padding: 20px;
+#quiz-rules-section {
+    text-align: center;
+    max-width: 400px;
+    padding: 10px 0;
+}
+
+/* "Quiz Rules" title */
+#quiz-rules-section h2 {
+    font-size: 20px;
+    margin-bottom: 5px; 
+    text-align: center;
+    display: block;
+}
+
+/* Rules List */
+#quiz-rules {
+    text-align: left;
+    list-style-type: none;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px; 
     border-radius: 10px;
-    width: 50%;
-    margin: auto;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease-in-out;
+}
+
+#quiz-rules li {
+    margin: 4px 0;
+    padding-left: 10px;
+}
+
+#input-section {
+    text-align: center;
+    width: 100%;
+    margin-right: -55px;
+}
+
+/* Input Field */
+input[type="text"] {
+    width: 83%;
+    font-size: 18px;
+    padding: 12px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    margin-top: 8px;
 }
 
 /* Animations */
