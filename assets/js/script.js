@@ -13,21 +13,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const finalFeedback = document.getElementById("final-feedback");
     const usernameInput = document.getElementById("username");
     const usernameDisplay = document.getElementById("username-display");
-    const feedbackImage = document.getElementById("feedback-image");
-    const questionNumberDisplay = document.getElementById("question-number");
+    const questionNumberDisplay = document.getElementById("question-number"); 
     const totalQuestionsDisplay = document.getElementById("total-questions");
     const questionCounter = document.getElementById("question-counter");
 
     let currentQuestionIndex = 0, score = 0, timer, username;
-
+    
+    // Quiz questions
     const questions = [
-        { question: "What is the capital of France?", answers: ["Paris", "London", "Berlin", "Rome"], correct: "Paris", image: "correct.png" },
-        { question: "Who wrote 'Hamlet'?", answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], correct: "Shakespeare", image: "correct.png" },
-        { question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Jupiter", "Venus"], correct: "Mars", image: "correct.png" },
+        { 
+            question: "What is the capital of France?", 
+            answers: ["Paris", "London", "Berlin", "Rome"], 
+            correct: "Paris"
+        },
+        { 
+            question: "Who wrote 'Hamlet'?", 
+            answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], 
+            correct: "Shakespeare"
+        },
+        { 
+            question: "Which planet is known as the Red Planet?", 
+            answers: ["Earth", "Mars", "Jupiter", "Venus"], 
+            correct: "Mars"
+        },
     ];
 
+    // Display total number of questions
     totalQuestionsDisplay.textContent = questions.length;
 
+    // Event listeners
     startBtn.addEventListener("click", startQuiz);
     nextBtn.addEventListener("click", () => {
         currentQuestionIndex++;
@@ -40,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
 
         if (!usernameRegex.test(username)) {
-            alert("Please enter a valid username (Start with a capital letter, at least 2 words).");
+            alert("Please enter a valid username (Start with a capital letter).");
             return;
         }
 
@@ -69,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function showQuestion(questionObj) {
-        questionText.textContent = questionObj.question; // FIXED: Make sure question is displayed
+        questionText.textContent = questionObj.question; 
         answerButtons.innerHTML = ""; // Clear previous buttons properly
 
         questionObj.answers.forEach(answer => {
