@@ -36,6 +36,51 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: ["Earth", "Mars", "Jupiter", "Venus"], 
             correct: "Mars"
         },
+        { 
+            question: "Which country won the FIFA World Cup in 2018?", 
+            answers: ["Germany", "Brazil", "France", "Argentina"], 
+            correct: "France"
+        },
+        { 
+            question: "In which sport would you perform a slam dunk?", 
+            answers: ["Tennis", "Basketball", "Volleyball", "Football"], 
+            correct: "Basketball"
+        },
+        { 
+            question: "Which movie features the quote 'I am your father'?", 
+            answers: ["Harry Potter", "The Lord of the Rings", "Star Wars", "The Matrix"], 
+            correct: "Star Wars"
+        },
+        { 
+            question: "Who played the character of Jack in Titanic?", 
+            answers: ["Brad Pitt", "Leonardo DiCaprio", "Johnny Depp", "Matt Damon"], 
+            correct: "Leonardo DiCaprio"
+        },
+        { 
+            question: "Who wrote 'Pride and Prejudice'?", 
+            answers: ["Charlotte Brontë", "Jane Austen", "Emily Dickinson", "Agatha Christie"], 
+            correct: "Jane Austen"
+        },
+        { 
+            question: "What is the first book in the 'Harry Potter' series?", 
+            answers: ["The Goblet of Fire", "The Philosopher's Stone", "The Order of the Phoenix", "The Chamber of Secrets"], 
+            correct: "The Philosopher's Stone"
+        },
+        { 
+            question: "What is the national sport of Canada?", 
+            answers: ["Ice Hockey", "Soccer", "Cricket", "Rugby"], 
+            correct: "Ice Hockey"
+        },
+        { 
+            question: "How do you usually react in stressful situations?", 
+            answers: ["Stay calm and analyze", "Act impulsively", "Seek help from others", "Avoid the situation"], 
+            correct: "Stay calm and analyze"
+        },
+        { 
+            question: "Which word best describes your approach to life?", 
+            answers: ["Optimistic", "Realistic", "Adventurous", "Cautious"], 
+            correct: "Optimistic"
+        }        
     ];
 
     // Display total number of questions
@@ -54,24 +99,33 @@ document.addEventListener("DOMContentLoaded", () => {
         username = usernameInput.value.trim();
         const usernameRegex = /^[A-Z][a-z]+( [A-Z][a-z]+)*$/;
 
-        if (!usernameRegex.test(username)) {
-            alert("Please enter a valid username (Start with a capital letter).");
-            return;
-        }
+        if (!usernameRegex.test(username) || username.length < 3) {
+            // Apply error styles
+            usernameInput.classList.add("input-error");
+    
+            // Clear input field
+            usernameInput.value = "";
 
-        if (username.length < 3) {  
-            alert("Username must be at least 3 characters long.");
-            return;
-        }
+            // Keep the focus in the input box
+            usernameInput.focus();  
+    
+            // Remove error style after 600ms
+            setTimeout(() => {
+                usernameInput.classList.remove("input-error");
+            }, 600);
+    
+            return;  // Stop function if invalid
+        }    
 
         // Store username and display it
         localStorage.setItem("username", username);
         usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
 
-        // Hide start screen and display it
-        startScreen.classList.add("hidden");
-        quizScreen.classList.remove("hidden");
-        questionCounter.style.display = "block";
+        // Hide input section and show quiz screen
+        document.getElementById("input-section").style.display = "none"; 
+        document.getElementById("quiz-rules-section").style.display = "none"; 
+        document.getElementById("quiz-screen").style.display = "block"; 
+        document.getElementById("question-counter").style.display = "block";
 
         score = 0;
         currentQuestionIndex = 0;
@@ -192,19 +246,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ends the quiz and shows the results screen
     function endQuiz() {
-        quizScreen.classList.add("hidden");
-        resultScreen.classList.remove("hidden");
-        questionCounter.style.display = "none"; 
-
+        // Hide quiz screen and question counter
+        document.getElementById("quiz-screen").style.display = "none"; 
+        document.getElementById("question-counter").style.display = "none";  
+    
+        // Hide input section and rules (in case they are still visible)
+        document.getElementById("input-section").style.display = "none";  
+        document.getElementById("quiz-rules-section").style.display = "none";  
+    
+        // Show the result screen
+        document.getElementById("result-screen").style.display = "block";  
+    
+        // Display final score and feedback
         finalScore.textContent = `Your score: ${score} / ${questions.length}`;
-        finalFeedback.textContent = score > 1 ? "Great job!" : "Better luck next time!";
+        finalFeedback.textContent = score > 5 ? "Great job!" : "Better luck next time!";
     }
 
-    // Restarts the quiz
     function restartQuiz() {
-        resultScreen.classList.add("hidden");
-        startScreen.classList.remove("hidden");
+        // Hide result screen and show start screen
+        resultScreen.style.display = "none";
+        startScreen.style.display = "block"; 
+    
+        // Show input section and quiz rules again
+        document.getElementById("input-section").style.display = "block";
+        document.getElementById("quiz-rules-section").style.display = "block";
+    
+        // Hide quiz screen and question counter
+        quizScreen.style.display = "none";
         questionCounter.style.display = "none"; 
+    
+        // Reset username input
         usernameInput.value = "";
-    }
+        usernameInput.classList.remove("input-error");
+    
+        // Reset quiz state variables
+        score = 0;
+        currentQuestionIndex = 0;
+    }    
 });
