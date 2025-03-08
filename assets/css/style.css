@@ -109,6 +109,22 @@ input[type="text"] {
     }
 }
 
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Error styling */
+.input-error {
+    border: 2px solid red;
+    background-color: #ffcccc;
+    animation: shake 0.3s ease-in-out;
+}
+
 /* Question Styling */
 #question-text {
     font-size: 20px;
