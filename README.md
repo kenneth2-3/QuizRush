@@ -2,7 +2,7 @@
 
 # QuizRush - Online Quiz Game
 
-Welcome to QuizRush online game! This online quiz game is a dynamic and responsive webpage dedicated to promoting educative online games, designed to enlighten users about how online quiz/game can be quite rich in knowledge.The site is optimized for mobile, tablet, and desktop devices, ensuring a seamless user experience across all platforms. In here [QuizRush]() is the live link of the website.
+Welcome to QuizRush online game! This online quiz game is a dynamic and responsive webpage dedicated to promoting educative online games, designed to enlighten users about how online quiz/game can be quite rich in knowledge.The site is optimized for mobile, tablet, and desktop devices, ensuring a seamless user experience across all platforms. In here [QuizRush](https://kenneth2-3.github.io/QuizRush/) is the live link of the website.
 
 
 ## Project Overview
@@ -227,13 +227,13 @@ QuizRush/
 
 - The site was deployed to GitHub Pages. The steps to deploy are as follows:
 
-   - In the [GitHub repository](), navigate to the Settings tab.
+   - In the [GitHub repository](https://github.com/kenneth2-3/QuizRush), navigate to the Settings tab.
 
    - From the Pages section, select the Main Branch as the source, then click "Save".
 
    - The page will be automatically refreshed, indicating a successful deployment.
 
-The live link can be found [here]().
+The live link can be found [here](https://kenneth2-3.github.io/QuizRush/).
 
 ## Local Deployment 
 
