@@ -206,19 +206,19 @@ QuizRush/
 ## Screenshots
 
 ### Start page
-
+![Startpage Screenshot](assets/documentation-images/screenshot-of-start-page.png)
 
 ### Questions page
-
+![Questionspage Screenshot](assets/documentation-images/screenshot-of-questions-page.png)
 
 ### Feedback page
-
+![Feedbackpage Screenshot](assets/documentation-images/screenshot-of-feedback-page.png)
 
 ---
 
 ## Testing
 
-
+Please refer to the [Testing.md](./TESTING.md) file for all test-related documentation.
 
 ---
 
