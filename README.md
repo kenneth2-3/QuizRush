@@ -61,9 +61,10 @@ QuizRush is an interactive online quiz game designed to:
 
 ### Wireframes
 
--
--
--
+### Desktop
+- [Desktop Startpage Wireframe](https://wireframe.cc/Gfp4V6)
+- [Desktop Questionspage Wireframe](https://wireframe.cc/SJdyVd)
+- [Desktop Feedbackpage Wireframe](https://wireframe.cc/P8nv5W)
 
 ## Features 
 
