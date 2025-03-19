@@ -30,3 +30,17 @@ In order to confirm the correct functionality, responsiveness and appearance:
      - Feedback page:
 
      ![Feedback Page](assets/documentation-images/feedback-devtool-chrome.png)
+
+- The website was checked with [Website Responsive Test](https://websiteresponsivetest.com/)
+
+  - Desktop Screens:
+
+  ![Desktop Startpage](assets/documentation-images/desktop-responsive-1.png)
+  ![Desktop Questionspage](assets/documentation-images/desktop-responsive-2.png)
+  ![Desktop Feedbackpage](assets/documentation-images/desktop-responsive-3.png)
+
+  - Tablet Screens:
+
+  ![Tablet Startpage](assets/documentation-images/tablet-responsive-1.png)
+  ![Tablet Questionspage](assets/documentation-images/tablet-responsive-2.png)
+  ![Tablet Feedbackpage](assets/documentation-images/tablet-responsive-3.png)
