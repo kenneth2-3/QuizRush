@@ -205,13 +205,13 @@ QuizRush/
 
 ## Screenshots
 
-### Start page
+### Startpage
 ![Startpage Screenshot](assets/documentation-images/screenshot-of-start-page.png)
 
-### Questions page
+### Questionspage
 ![Questionspage Screenshot](assets/documentation-images/screenshot-of-questions-page.png)
 
-### Feedback page
+### Feedbackpage
 ![Feedbackpage Screenshot](assets/documentation-images/screenshot-of-feedback-page.png)
 
 ---
