@@ -124,10 +124,13 @@ The typography reflects a harmonious blend of readability and artistic flair:
 QuizRush/
 │-- assets/
 │   │-- css/
-│   │   ├── styles.css
+│   │   ├── style.css
+│   │-- documentation-images/
+|   |   ├── screenshot-of-feedback-page.png
+|   |   ├── screenshot-of-questions-page.png
+|   |   ├── screenshot-of-start-page.png
 │   │-- js/
 │   │   ├── script.js
-│   │-- documentation-images/
 │-- favicon.ico
 │-- index.html
 │-- LICENSE
