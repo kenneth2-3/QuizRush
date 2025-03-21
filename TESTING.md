@@ -79,4 +79,16 @@ In order to confirm the correct functionality, responsiveness and appearance:
 
 ## Validator testing
 - ### HTML
-  #### Start Page
+   - No errors or warnings were found when passing through the official W3C validator.
+
+   ![HTML Validator](assets/documentation-images/html-validator.png)
+
+- ### CSS
+   - No errors or warnings were found when passing through the official W3C validator.  
+
+   ![CSS Validator](assets/documentation-images/css-validator.png)
+
+- ### JS
+   - No errors or warnings were found when passing through the validator.  
+
+   ![JS Validator](assets/documentation-images/jshint-validator.png)
