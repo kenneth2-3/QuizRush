@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Kenneth Adanma">
     <meta name="keywords" content="Quiz, Question, Start">
-    <meta name="description" content="QuizRush, a challenging quiz to entertain online users."> 
+    <meta name="description" content="QuizRush, a challenging quiz to entertain online users.">
     <title>QuizRush</title>
 
     <!-- link for css -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-    
-    <nav>
-        <header>
-            <h1>QuizRush</h1> 
-        </header>
+    <header>
+        <h1>QuizRush</h1>
+    </header>
 
-        <main>
-            <section id="start-screen">
-                <section id="quiz-rules-section">
-                    <h2>Quiz Rules:</h2>
-                    <ul id="quiz-rules">
-                        <li>- Answer all questions within the time limit.</li>
-                        <li>- Your username should start with a capital letter.</li>
-                        <li>- Special characters like "$%*&@$" are not allowed.</li>
-                        <li>- Numbers are not allowed as username.</li>
-                        <li>- Each correct answer earns you one point.</li>
-                        <li>- Usernames should contain at least three or more letters.</li>
-                        <li>- Once the time is up and the user has not picked an answer the correct answer will show!</li>
-                        <li>- No going back to previous questions.</li>
-                        <li>- The total score will be shown after the quiz is done.</li>
-                        <li>- Try to get the highest score!</li>
-                    </ul>
-                </section>
-            
-                <section id="input-section">
-                    <label for="username">Enter your name:</label>
-                    <input type="text" id="username" placeholder="Your name">
-                    <button id="start-btn">Start Quiz</button>
-                </section>                
-            </section>
+    <main>
+        <section id="start-screen">
+            <div id="quiz-rules-section">
+                <h2>Quiz Rules:</h2>
+                <ul id="quiz-rules">
+                    <li>- Answer all questions within the time limit.</li>
+                    <li>- Your username should start with a capital letter.</li>
+                    <li>- Special characters like "$%*&@$" are not allowed.</li>
+                    <li>- Numbers are not allowed as username.</li>
+                    <li>- Each correct answer earns you one point.</li>
+                    <li>- Usernames should contain at least three or more letters.</li>
+                    <li>- Once the time is up and the user has not picked an answer, the correct answer will show!</li>
+                    <li>- No going back to previous questions.</li>
+                    <li>- The total score will be shown after the quiz is done.</li>
+                    <li>- Try to get the highest score!</li>
+                </ul>
+            </div>
 
-            <section id="quiz-screen" class="hidden">
-                <h2 id="username-display"></h2>
-                <p id="question-text"></p>
-                <div id="answer-buttons"></div>
-                <p id="time-left"></p>
-                <p id="feedback"></p>
-                <button id="next-btn" class="hidden">Next Question</button>
-            </section>
+            <div id="input-section">
+                <label for="username">Enter your name:</label>
+                <input type="text" id="username" placeholder="Your name">
+                <button id="start-btn">Start Quiz</button>
+            </div>
+        </section>
 
-            <section id="result-screen" class="hidden">
-                <h2>Quiz Over!</h2>
-                <p id="final-score"></p>
-                <p id="final-feedback"></p>
-                <button id="restart-btn">Restart Quiz</button>
-            </section>
+        <section id="quiz-screen" class="hidden">
+            <h2 id="username-display">Welcome</h2>
+            <p id="question-text">Your question will appear here...</p>
+            <div id="answer-buttons"></div>
+            <p id="time-left">Time left: 10s</p>
+            <p id="feedback"></p>
+            <button id="next-btn" class="hidden">Next Question</button>
+        </section>
 
-            <div id="question-counter" class="hidden">Question <span id="question-number">1</span> / <span id="total-questions">0</span></div>
-        </main>
-    </nav>
-    
+        <section id="result-screen" class="hidden">
+            <h2>Quiz Over!</h2>
+            <p id="final-score"></p>
+            <p id="final-feedback"></p>
+            <button id="restart-btn">Restart Quiz</button>
+        </section>
+
+        <div id="question-counter" class="hidden">
+            Question <span id="question-number">1</span> / <span id="total-questions">0</span>
+        </div>
+    </main>
+
     <!-- link for js -->
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>

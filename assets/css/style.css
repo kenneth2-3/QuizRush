@@ -35,34 +35,25 @@ button:hover {
 }
 
 /* Start Screen */
-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 20px;
-}
-
 header h1 {
     font-size: 32px;
     font-weight: bold;
     color: #004085;
-    margin-right: 25px;
+    margin-right: 0;
 }
 
-/* Quiz Screen */
+/* Centering the Quiz Rules */
 #quiz-rules-section {
     text-align: center;
-    max-width: 400px;
-    padding: 10px 0;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
 }
 
 /* "Quiz Rules" title */
 #quiz-rules-section h2 {
-    font-size: 20px;
-    margin-bottom: 5px; 
-    text-align: center;
-    display: block;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 /* Rules List */
@@ -81,20 +72,36 @@ header h1 {
     padding-left: 10px;
 }
 
+/* Input Section */
 #input-section {
-    text-align: center;
-    width: 100%;
-    margin-right: -55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Adds spacing between elements */
+    margin-top: 20px;
 }
 
 /* Input Field */
 input[type="text"] {
-    width: 83%;
+    width: 20%;
     font-size: 18px;
     padding: 12px;
     border: 2px solid #007bff;
     border-radius: 5px;
     margin-top: 8px;
+}
+
+/* Label Styling */
+#input-section label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Button Styling */
+#start-btn {
+    width: 11%;
+    max-width: 300px;
 }
 
 /* Animations */
@@ -224,4 +231,14 @@ input[type="text"] {
 .btn:disabled {
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+    .btn {
+        width: 90%;
+    }
 }
