@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const startScreen = document.getElementById("start-screen");
-    const quizScreen = document.getElementById("quiz-screen");
-    const resultScreen = document.getElementById("result-screen");
+    const quizScreen = document.getElementById("quizContainer"); 
+    const resultScreen = document.getElementById("resultsPage"); 
     const startBtn = document.getElementById("start-btn");
     const nextBtn = document.getElementById("next-btn");
-    const restartBtn = document.getElementById("restart-btn");
+    const restartBtn = document.getElementById("restartBtn");
     const questionText = document.getElementById("question-text");
     const answerButtons = document.getElementById("answer-buttons");
     const timerDisplay = document.getElementById("time-left");
@@ -16,83 +16,208 @@ document.addEventListener("DOMContentLoaded", () => {
     const questionNumberDisplay = document.getElementById("question-number"); 
     const totalQuestionsDisplay = document.getElementById("total-questions");
     const questionCounter = document.getElementById("question-counter");
-
-    let currentQuestionIndex = 0, score = 0, timer, username;
     
     // Quiz questions
-    const questions = [
-        { 
-            question: "What is the capital of France?", 
-            answers: ["Paris", "London", "Berlin", "Rome"], 
-            correct: "Paris"
-        },
-        { 
-            question: "Who wrote 'Hamlet'?", 
-            answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], 
-            correct: "Shakespeare"
-        },
-        { 
-            question: "Which planet is known as the Red Planet?", 
-            answers: ["Earth", "Mars", "Jupiter", "Venus"], 
-            correct: "Mars"
-        },
-        { 
-            question: "Which country won the FIFA World Cup in 2018?", 
-            answers: ["Germany", "Brazil", "France", "Argentina"], 
-            correct: "France"
-        },
-        { 
-            question: "In which sport would you perform a slam dunk?", 
-            answers: ["Tennis", "Basketball", "Volleyball", "Football"], 
-            correct: "Basketball"
-        },
-        { 
-            question: "Which movie features the quote 'I am your father'?", 
-            answers: ["Harry Potter", "The Lord of the Rings", "Star Wars", "The Matrix"], 
-            correct: "Star Wars"
-        },
-        { 
-            question: "Who played the character of Jack in Titanic?", 
-            answers: ["Brad Pitt", "Leonardo DiCaprio", "Johnny Depp", "Matt Damon"], 
-            correct: "Leonardo DiCaprio"
-        },
-        { 
-            question: "Who wrote 'Pride and Prejudice'?", 
-            answers: ["Charlotte Brontë", "Jane Austen", "Emily Dickinson", "Agatha Christie"], 
-            correct: "Jane Austen"
-        },
-        { 
-            question: "What is the first book in the 'Harry Potter' series?", 
-            answers: ["The Goblet of Fire", "The Philosopher's Stone", "The Order of the Phoenix", "The Chamber of Secrets"], 
-            correct: "The Philosopher's Stone"
-        },
-        { 
-            question: "What is the national sport of Canada?", 
-            answers: ["Ice Hockey", "Soccer", "Cricket", "Rugby"], 
-            correct: "Ice Hockey"
-        },
-        { 
-            question: "How do you usually react in stressful situations?", 
-            answers: ["Stay calm and analyze", "Act impulsively", "Seek help from others", "Avoid the situation"], 
-            correct: "Stay calm and analyze"
-        },
-        { 
-            question: "Which word best describes your approach to life?", 
-            answers: ["Optimistic", "Realistic", "Adventurous", "Cautious"], 
-            correct: "Optimistic"
-        }        
+    const questionSets = [
+        [ // Set 1
+            { 
+                question: "What is the capital of France?", 
+                answers: ["Paris", "London", "Berlin", "Rome"], 
+                correct: "Paris"
+            },
+            { 
+                question: "Who wrote 'Hamlet'?", 
+                answers: ["Shakespeare", "Hemingway", "Tolkien", "Austen"], 
+                correct: "Shakespeare"
+            },
+            { 
+                question: "Which planet is known as the Red Planet?", 
+                answers: ["Earth", "Mars", "Jupiter", "Venus"], 
+                correct: "Mars"
+            },
+            { 
+                question: "Which country won the FIFA World Cup in 2018?", 
+                answers: ["Germany", "Brazil", "France", "Argentina"], 
+                correct: "France"
+            },
+            { 
+                question: "In which sport would you perform a slam dunk?", 
+                answers: ["Tennis", "Basketball", "Volleyball", "Football"], 
+                correct: "Basketball"
+            },
+            { 
+                question: "Which movie features the quote 'I am your father'?", 
+                answers: ["Harry Potter", "The Lord of the Rings", "Star Wars", "The Matrix"], 
+                correct: "Star Wars"
+            },
+            { 
+                question: "Who played the character of Jack in Titanic?", 
+                answers: ["Brad Pitt", "Leonardo DiCaprio", "Johnny Depp", "Matt Damon"], 
+                correct: "Leonardo DiCaprio"
+            },
+            { 
+                question: "Who wrote 'Pride and Prejudice'?", 
+                answers: ["Charlotte Brontë", "Jane Austen", "Emily Dickinson", "Agatha Christie"], 
+                correct: "Jane Austen"
+            },
+            { 
+                question: "What is the first book in the 'Harry Potter' series?", 
+                answers: ["The Goblet of Fire", "The Philosopher's Stone", "The Order of the Phoenix", "The Chamber of Secrets"], 
+                correct: "The Philosopher's Stone"
+            },
+            { 
+                question: "What is the national sport of Canada?", 
+                answers: ["Ice Hockey", "Soccer", "Cricket", "Rugby"], 
+                correct: "Ice Hockey"
+            },
+            {
+                question: "Which actress starred as Katniss Everdeen in 'The Hunger Games' series?",
+                answers: ["Emma Watson", "Jennifer Lawrence", "Kristen Stewart", "Margot Robbie"],
+                correct: "Jennifer Lawrence"
+            },
+            {
+                question: "How many players are on the field per team in a standard soccer match?",
+                answers: ["9", "10", "11", "12"],
+                correct: "11"
+            }
+        ],
+        [ // Set 2
+            {
+                question: "Which country won the first-ever FIFA World Cup in 1930?",
+                answers: ["Argentina", "Brazil", "Uruguay", "Italy"],
+                correct: "Uruguay"
+            },
+            {
+                question: "In basketball, how many points is a free throw worth?",
+                answers: ["1", "3", "5", "8"],
+                correct: "1"
+            },
+            {
+                question: "Which movie won the first-ever Academy Award for Best Picture?",
+                answers: ["Gone with the Wind", "Wings", "Casablanca", "Citizen Kane"],
+                correct: "Wings"
+            },
+            {
+                question: "Which film features the famous line: 'Here’s looking at you, kid'?",
+                answers: ["The Godfather", "Casablanca", "Gone with the Wind", "Titanic"],
+                correct: "Casablanca"
+            },
+            {
+                question: "Who wrote the novel 1984?",
+                answers: ["Aldous Huxley", "George Orwell", "Ray Bradbury", "J.R.R. Tolkien"],
+                correct: "George Orwell"
+            },
+            {
+                question: "Which novel features the character Atticus Finch?",
+                answers: ["The Great Gatsby", "Moby-Dick", "To Kill a Mockingbird", "Pride and Prejudice"],
+                correct: "To Kill a Mockingbird"
+            },
+            {
+                question: "What is the name of Sherlock Holmes’ assistant?",
+                answers: ["Watson", "Lestrade", "Moriarty", "Mycroft"],
+                correct: "Watson"
+            },
+            {
+                question: "Who wrote The Catcher in the Rye?",
+                answers: ["Ernest Hemingway", "J.D. Salinger", "John Steinbeck", "William Faulkner"],
+                correct: "J.D. Salinger"
+            },
+            {
+                question: "Who holds the record for the most home runs in a single MLB season?",
+                answers: ["Babe Ruth", "Barry Bonds", "Hank Aaron", "Mark McGwire"],
+                correct: "Barry Bonds"
+            },
+            {
+                question: "What is the only Grand Slam tennis tournament played on clay?",
+                answers: ["Wimbledon", "Australia Open", "US Open", "French Open"],
+                correct: "French Open"
+            },
+            {
+                question: "Who played Jack Dawson in Titanic (1997)?",
+                answers: ["Brad Pitt", "Tom Cruise", "Leonardo DiCarpio", "Johnny Depp"],
+                correct: "Leonardo DiCarpio"
+            },
+            {
+                question: "Which animated film was Disney’s first full-length feature?",
+                answers: ["Cinderella", "Snow White and the Seven Dwarfs", "Pinocchio", "Fantasia"],
+                correct: "Snow White and the Seven Dwarfs"
+            }
+        ],
+        [ // Set 3
+            {
+                question: "How long is an Olympic swimming pool?",
+                answers: ["25 meters", "50 meters", "75 meters", "100 meters"],
+                correct: "50 meters"
+            },
+            {
+                question: "Which country has won the most Olympic gold medals in men’s ice hockey?",
+                answers: ["Russia", "Canada", "USA", "Sweden"],
+                correct: "Canada"
+            },
+            {
+                question: "Which actor has played James Bond the most times in official films?",
+                answers: ["Sean Connery", "Roger Moore", "Daniel Craig", "Pierce Brosnan"],
+                correct: "Roger Moore"
+            },
+            {
+                question: "What is the highest-grossing movie of all time (adjusted for inflation)?",
+                answers: ["Avatar", "Titanic", "Avengers:Endgame", "Gone with the Wind"],
+                correct: "Gone with the Wind"
+            },
+            {
+                question: "Which Shakespeare play features the line 'To be, or not to be'?",
+                answers: ["Macbeth", "Othello", "Hamlet", "Romeo and Juliet"],
+                correct: "Hamlet"
+            },
+            {
+                question: "Who is the author of Frankenstein?",
+                answers: ["Mary Shelly", "Bram Stoker", "Edgar Allan Poe", "Charles Dickens"],
+                correct: "Mary Shelly"
+            },
+            {
+                question: "Who was the first African-American to win a Grand Slam tennis title?",
+                answers: ["Serena Williams", "Arthur Ashe", "Venus Williams", "Althea Gibson"],
+                correct: "Arthur Ashe"
+            },
+            {
+                question: "Which Formula 1 driver has won the most world championships?",
+                answers: ["Ayrton Senna", "Michael Schumacher", "Lewis Hamilton", "Sebastian Vettel"],
+                correct: "Lewis Hamilton"
+            },
+            {
+                question: "In 'The Dark Knight' which actor played The Joker?",
+                answers: ["Jack Nicholson", "Heath Ledger", "Jared Leto", "Joaquin Phoenix"],
+                correct: "Heath Ledger"
+            },
+            {
+                question: "What year was the first Star Wars movie released?",
+                answers: ["1975", "1977", "1980", "1983"],
+                correct: "1977"
+            },
+            {
+                question: "What is the first book in the Harry Potter series?",
+                answers: ["The Chamber of Secrets", "The Philosopher's Stone", "The Prisoner of Azkaban", "The Goblet of Fire"],
+                correct: "The Philosopher's Stone"
+            },
+            {
+                question: "In The Lord of the Rings, what is the name of Frodo’s best friend and companion?",
+                answers: ["Legolas", "Samwise Gamgee", "Gandalf", "Boromir"],
+                correct: "Samwise Gamgee"
+            }
+        ]
     ];
+
+    let currentSetIndex = 0, score = 0, timer, username;
+    let currentQuestionIndex = 0;
+    let questions = [...questionSets[currentSetIndex]]; // Loads first set
 
     // Display total number of questions
     totalQuestionsDisplay.textContent = questions.length;
 
     // Event listeners
     startBtn.addEventListener("click", startQuiz);
-    nextBtn.addEventListener("click", () => {
-        currentQuestionIndex++;
-        setNextQuestion();
-    });
-    restartBtn.addEventListener("click", restartQuiz);
+    nextBtn.addEventListener("click", setNextQuestion);
+    restartBtn.addEventListener("click", restartQuiz); // Moved this to the main scope
 
     // Starts the quiz
     function startQuiz() {
@@ -122,13 +247,18 @@ document.addEventListener("DOMContentLoaded", () => {
         usernameDisplay.textContent = `Welcome to the quiz, ${username}!`;
 
         // Hide input section and show quiz screen
-        document.getElementById("input-section").style.display = "none"; 
+        startScreen.style.display = "none"; 
         document.getElementById("quiz-rules-section").style.display = "none"; 
-        document.getElementById("quiz-screen").style.display = "block"; 
-        document.getElementById("question-counter").style.display = "block";
+        quizScreen.style.display = "block"; 
+        questionCounter.style.display = "block";
 
         score = 0;
         currentQuestionIndex = 0;
+
+        // Ensure the correct set is loaded
+        questions = [...questionSets[currentSetIndex]];
+        totalQuestionsDisplay.textContent = questions.length; // Update total questions count
+
         setNextQuestion();
     }
 
@@ -140,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
             questionNumberDisplay.textContent = currentQuestionIndex + 1;
             showQuestion(questions[currentQuestionIndex]);
             startTimer();
+            currentQuestionIndex++;
         } else {
             endQuiz();
         }
@@ -154,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const button = document.createElement("button");
             button.textContent = answer;
             button.classList.add("btn");
-            button.addEventListener("click", () => selectAnswer(button, answer, questionObj.correct, questionObj.image));
+            button.addEventListener("click", () => selectAnswer(button, answer, questionObj.correct));
             answerButtons.appendChild(button);
         });
 
@@ -186,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
         // Only show next button if it's NOT the last question
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < questions.length) {
             nextBtn.classList.remove("hidden");
         } else {
             setTimeout(endQuiz, 2000); // If last question, end quiz
@@ -237,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     
         // Show "Next Question" button only if NOT the last question
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < questions.length) {
             nextBtn.classList.remove("hidden");
         } else {
             setTimeout(endQuiz, 2000); // End quiz on last question
@@ -247,15 +378,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ends the quiz and shows the results screen
     function endQuiz() {
         // Hide quiz screen and question counter
-        document.getElementById("quiz-screen").style.display = "none"; 
-        document.getElementById("question-counter").style.display = "none";  
+        quizScreen.style.display = "none"; 
+        questionCounter.style.display = "none";  
+        resultScreen.style.display = "block"; // Show results
     
         // Hide input section and rules (in case they are still visible)
         document.getElementById("input-section").style.display = "none";  
         document.getElementById("quiz-rules-section").style.display = "none";  
-    
-        // Show the result screen
-        document.getElementById("result-screen").style.display = "block";  
     
         // Display final score and feedback
         finalScore.textContent = `Your score: ${score} / ${questions.length}`;
@@ -263,24 +392,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function restartQuiz() {
-        // Hide result screen and show start screen
+        currentSetIndex = (currentSetIndex + 1) % questionSets.length; // Switch to next question set
+        questions = [...questionSets[currentSetIndex]]; // Load new set
+        score = 0; // Reset score
+        currentQuestionIndex = 0; // Reset question index
+    
+        // Hide the results page
         resultScreen.style.display = "none";
-        startScreen.style.display = "block"; 
     
-        // Show input section and quiz rules again
-        document.getElementById("input-section").style.display = "block";
-        document.getElementById("quiz-rules-section").style.display = "block";
+        // Show the quiz container again
+        quizScreen.style.display = "block";
     
-        // Hide quiz screen and question counter
-        quizScreen.style.display = "none";
-        questionCounter.style.display = "none"; 
-    
-        // Reset username input
-        usernameInput.value = "";
-        usernameInput.classList.remove("input-error");
-    
-        // Reset quiz state variables
-        score = 0;
-        currentQuestionIndex = 0;
-    }    
+        startQuiz(); // Restart quiz with the new set
+    }        
 });
