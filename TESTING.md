@@ -36,19 +36,25 @@ In order to confirm the correct functionality, responsiveness and appearance:
   - Desktop Screens:
 
   ![Desktop Startpage](assets/documentation-images/desktop-responsive-1.png)
+
   ![Desktop Questionspage](assets/documentation-images/desktop-responsive-2.png)
+
   ![Desktop Feedbackpage](assets/documentation-images/desktop-responsive-3.png)
 
   - Tablet Screens:
 
   ![Tablet Startpage](assets/documentation-images/tablet-responsive-1.png)
+
   ![Tablet Questionspage](assets/documentation-images/tablet-responsive-2.png)
+
   ![Tablet Feedbackpage](assets/documentation-images/tablet-responsive-3.png)
 
   - Mobile Screens:
 
   ![Mobile Startpage](assets/documentation-images/mobile-responsive-1.png)
+
   ![Mobile Questionspage](assets/documentation-images/mobile-responsive-2.png)
+  
   ![Mobile Feedbackpage](assets/documentation-images/mobile-responsive-3.png)
 
 - The functionality of the links in the website was checked as well by different users.
