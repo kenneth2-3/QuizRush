@@ -92,3 +92,38 @@ In order to confirm the correct functionality, responsiveness and appearance:
    - No errors or warnings were found when passing through the validator.  
 
    ![JS Validator](assets/documentation-images/jshint-validator.png)
+
+- ## LightHouse report
+
+    - Using Lighthouse in devtools I confirmed that the website is performing well, accessible and fonts chosen are readable.
+
+   ### Start Page
+
+   ![Start Page Lighthouse](assets/documentation-images/startpage-lighthouse-test.png)
+
+   ### Questions Page
+
+   ![Questions Page Lighthouse](assets/documentation-images/questionspage-lighthouse-test.png)
+
+
+## Bugs
+
+- ### Solved bugs
+    1. The question counter was visible on the start page.
+
+    *Solution:* Moved #question-counter so it only appears during the quiz.
+
+    2. The quiz rules were aligned to the left instead of being centered.
+
+    *Solution:* Adjusted the CSS to ensure #quiz-rules-section is centered under the "QuizRush" header.
+
+    3. The elements ("Enter your name," input box, and "Start Quiz" button) were not properly stacked.
+
+    *Solution:* Updated the CSS to make sure these elements appear vertically aligned.
+
+---
+
+- ### Unsolved bugs
+    - None.
+
+---
