@@ -247,7 +247,7 @@ input[type="text"] {
     }
 
     #question-counter {
-        top: 60px; /* Push it lower to avoid header overlap */
+        top: 55px; /* Push it lower to avoid header overlap */
         right: 10px;
         font-size: 14px;
         padding: 8px 12px;
