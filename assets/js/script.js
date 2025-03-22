@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const startScreen = document.getElementById("start-screen");
-    const quizScreen = document.getElementById("quizContainer"); 
-    const resultScreen = document.getElementById("resultsPage"); 
+    const quizScreen = document.getElementById("quiz-screen"); 
+    const resultScreen = document.getElementById("result-screen"); 
     const startBtn = document.getElementById("start-btn");
     const nextBtn = document.getElementById("next-btn");
     const restartBtn = document.getElementById("restartBtn");
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 question: "Who played Jack Dawson in Titanic (1997)?",
-                answers: ["Brad Pitt", "Tom Cruise", "Leonardo DiCarpio", "Johnny Depp"],
+                answers: ["Brad Pitt", "Tom Cruise", "Leonardo DiCaio", "Johnny Depp"],
                 correct: "Leonardo DiCarpio"
             },
             {
@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listeners
     startBtn.addEventListener("click", startQuiz);
     nextBtn.addEventListener("click", setNextQuestion);
-    restartBtn.addEventListener("click", restartQuiz); // Moved this to the main scope
+    restartBtn.addEventListener("click", restartQuiz); 
 
     // Starts the quiz
     function startQuiz() {
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Ensure the correct set is loaded
         questions = [...questionSets[currentSetIndex]];
-        totalQuestionsDisplay.textContent = questions.length; // Update total questions count
+        totalQuestionsDisplay.textContent = questions.length; 
 
         setNextQuestion();
     }
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         Array.from(answerButtons.children).forEach(button => {
             button.disabled = true; 
-            button.classList.add("disabled"); // Prevent hover effect
+            button.classList.add("disabled"); // Prevents hover effect
     
             if (button.textContent === correct) {
                 button.classList.add("correct-answer");
@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Disable all buttons and color them appropriately
         Array.from(answerButtons.children).forEach(button => {
             button.disabled = true;
-            button.classList.add("disabled"); // Prevent hover effect
+            button.classList.add("disabled"); // Prevents hover effect
     
             if (button.textContent === correctAnswer) {
                 button.classList.add("correct-answer"); // Green
@@ -392,17 +392,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function restartQuiz() {
-        currentSetIndex = (currentSetIndex + 1) % questionSets.length; // Switch to next question set
-        questions = [...questionSets[currentSetIndex]]; // Load new set
-        score = 0; // Reset score
-        currentQuestionIndex = 0; // Reset question index
+        if (currentSetIndex === questionSets.length - 1) { 
+            // If the third set is completed, go back to the full start page
+            currentSetIndex = 0; // Reset question set index
+            score = 0;
+            currentQuestionIndex = 0;
+            
+            // Hide result screen and quiz screen
+            resultScreen.style.display = "none";
+            quizScreen.style.display = "none";
     
-        // Hide the results page
-        resultScreen.style.display = "none";
-    
-        // Show the quiz container again
-        quizScreen.style.display = "block";
-    
-        startQuiz(); // Restart quiz with the new set
-    }        
+            // Show the full start screen (rules, input, and start button)
+            startScreen.style.display = "block";
+            document.getElementById("username").value = ""; // Clear previous username
+            document.getElementById("quiz-rules-section").style.display = "block"; // Show rules if hidden
+            document.getElementById("start-btn").style.display = "block"; // Ensure the start button is visible
+        } else {
+            // Otherwise, move to the next question set
+            currentSetIndex++;
+            questions = [...questionSets[currentSetIndex]];
+            score = 0;
+            currentQuestionIndex = 0;
+            resultScreen.style.display = "none";
+            quizScreen.style.display = "block";
+
+            startQuiz(); 
+        }
+    }    
 });
