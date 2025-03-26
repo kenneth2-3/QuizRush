@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const startScreen = document.getElementById("start-screen");
+    const startScreen = document.getElementById("start-screen-section");
     const quizScreen = document.getElementById("quiz-screen"); 
     const resultScreen = document.getElementById("result-screen"); 
     const startBtn = document.getElementById("start-btn");
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Hide input section and show quiz screen
         startScreen.style.display = "none"; 
-        document.getElementById("quiz-rules-section").style.display = "none"; 
+        // document.getElementById("quiz-rules-section").style.display = "none"; 
         quizScreen.style.display = "block"; 
         questionCounter.style.display = "block";
 
@@ -382,10 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
         questionCounter.style.display = "none";  
         resultScreen.style.display = "block"; // Show results
     
-        // Hide input section and rules (in case they are still visible)
-        document.getElementById("input-section").style.display = "none";  
-        document.getElementById("quiz-rules-section").style.display = "none";  
-    
         // Display final score and feedback
         finalScore.textContent = `Your score: ${score} / ${questions.length}`;
         finalFeedback.textContent = score > 5 ? "Great job!" : "Better luck next time!";
@@ -405,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Show the full start screen (rules, input, and start button)
             startScreen.style.display = "block";
             document.getElementById("username").value = ""; // Clear previous username
-            document.getElementById("quiz-rules-section").style.display = "block"; // Show rules if hidden
             document.getElementById("start-btn").style.display = "block"; // Ensure the start button is visible
         } else {
             // Otherwise, move to the next question set
