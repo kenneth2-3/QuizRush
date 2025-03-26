@@ -127,6 +127,10 @@ In order to confirm the correct functionality, responsiveness and appearance:
 
     *Solution:* Updated the CSS to make sure these elements appear vertically aligned.
 
+    4. The start screen was not showing after the third set of questions.
+
+    *Solution:* Updated the javascript code and cleared unncessaary code lines.
+
 ---
 
 - ### Unsolved bugs

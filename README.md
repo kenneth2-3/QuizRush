@@ -272,6 +272,9 @@ Contributions are welcome! If you have suggestions or find issues, please:
 
   - [Favicon](https://favicon.io/) was used to create a logo for QuizRush.
   - [Wireframe.cc](https://wireframe.cc/) was used to make a sketch for the website.
+  - [GitHub](https://github.com/) was used to add, commit and push the changes made in the project.
+  - [VS Code](https://code.visualstudio.com/) was used for running and debugging the code.
+  - [GitHub Pages](https://pages.github.com/) was used for creating the entry file for the site.
 
 ## License 
 
